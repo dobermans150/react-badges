@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 /* import tw_logo from '../images/twitter-logo.png'; */
 import './styles/BadgeList.css';
 
 export default class BadgeList extends Component {
   render() {
     const { badges } = this.props;
+
+    if (!badges) {
+      return (
+        <div>
+          <h3>No badges were found</h3>
+          <Link to="/badges/new" className="btn btn-primary">
+            Create new badge
+          </Link>
+        </div>
+      );
+    }
     return (
       <div>
         <ul className="list-unstyled">
