@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+
 import BadgeList from '../components/BadgeList';
+import PageLoading from '../components/PageLoading';
+import PageError from '../components/PageError';
+
 import { Link } from 'react-router-dom';
 import api from '../api';
 
@@ -18,6 +22,7 @@ export default class Badges extends Component {
 
   componentDidMount() {
     this.fetchData();
+    console.log(this.state.data);
   }
 
   fetchData = async () => {
@@ -31,13 +36,14 @@ export default class Badges extends Component {
     }
   };
 
+  /* JSX */
   render() {
     if (this.state.loading === true) {
-      return 'Loading...';
+      return <PageLoading />;
     }
 
     if (this.state.error) {
-      return `Error ${this.state.error}`;
+      return <PageError error={this.state.error} />;
     }
 
     return (

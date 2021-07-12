@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Badge from '../components/Badge';
 import BadgeForms from '../components/BadgeForms';
-import header from '../images/badge-header.svg';
+
+import api from '../api';
+import header from '../images/platziconf-logo.svg';
 import './styles/BadgeNews.css';
 
 export default class BadgeNews extends Component {
@@ -24,27 +26,45 @@ export default class BadgeNews extends Component {
     });
   };
 
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    this.setState({ loading: true, error: null });
+
+    try {
+      await api.badges.create(this.state.form);
+      this.setState({ loading: false, error: null });
+    } catch (error) {
+      this.setState({ loading: false, error: error });
+    }
+  };
+
   render() {
     return (
       <div>
         <div className="BadgeNew__hero">
-          <img className="img-fluid" src={header} alt="logo" />
+          <img
+            className="BadgeNew__hero-image img-fluid"
+            src={header}
+            alt="logo"
+          />
         </div>
 
         <div className="container">
           <div className="row">
             <div className="col-6">
               <Badge
-                firstName={this.state.form.firstName}
-                lastName={this.state.form.lastName}
-                jobTitle={this.state.form.jobTitle}
-                twitter={this.state.form.twitter}
+                firstName={this.state.form.firstName || 'FIRST_NAME'}
+                lastName={this.state.form.lastName || 'LAST_NAME'}
+                jobTitle={this.state.form.jobTitle || 'JOB_TITLE'}
+                twitter={this.state.form.twitter || 'twitter'}
                 avatar="https://s.gravatar.com/avatar/ec5d9d60f54a612e9960aac3666b2748?s=80"
+                email={this.state.form.email || ''}
               />
             </div>
             <div className="col-6">
               <BadgeForms
                 onChange={this.handleChanges}
+                onSubmit={this.handleSubmit}
                 formValues={this.state.form}
               />
             </div>

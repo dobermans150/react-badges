@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Gravatar from '../components/Gravatar';
+
 /* import tw_logo from '../images/twitter-logo.png'; */
 import './styles/BadgeList.css';
 
@@ -7,7 +9,7 @@ export default class BadgeList extends Component {
   render() {
     const { badges } = this.props;
 
-    if (!badges) {
+    if (!badges.length) {
       return (
         <div>
           <h3>No badges were found</h3>
@@ -23,8 +25,8 @@ export default class BadgeList extends Component {
           {badges.map((badges) => {
             return (
               <li key={badges.id} className="Badge__section-name-list">
-                <img
-                  src={badges.avatarUrl}
+                <Gravatar
+                  email={badges.email}
                   alt="imagen"
                   className="Badge__avatar-list"
                 />
