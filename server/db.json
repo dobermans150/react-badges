@@ -488,6 +488,22 @@
       "lastName": "Guevara",
       "twitter": "chrisjgr",
       "id": "i-ripJ1"
+    },
+    {
+      "jobTitle": "Desarrolladro web",
+      "email": "chrisdb150@gmail.com",
+      "firstName": "Chrisitna",
+      "lastName": "Guevara",
+      "twitter": "chrisjgr",
+      "id": "j0kUH_0"
+    },
+    {
+      "jobTitle": "superdog",
+      "email": "snoopy@example.com",
+      "firstName": "snoopy",
+      "lastName": "superdog",
+      "twitter": "snoopy",
+      "id": "VE_ZsxI"
     }
   ]
 }

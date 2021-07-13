@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Badge from '../components/Badge';
 import BadgeForms from '../components/BadgeForms';
+import PageLoading from '../components/PageLoading';
 
 import api from '../api';
 import header from '../images/platziconf-logo.svg';
@@ -8,6 +9,8 @@ import './styles/BadgeNews.css';
 
 export default class BadgeNews extends Component {
   state = {
+    loading: false,
+    error: null,
     form: {
       jobTitle: '',
       email: '',
@@ -33,12 +36,18 @@ export default class BadgeNews extends Component {
     try {
       await api.badges.create(this.state.form);
       this.setState({ loading: false, error: null });
+
+      this.props.history.push('/badges');
     } catch (error) {
       this.setState({ loading: false, error: error });
     }
   };
 
   render() {
+    if (this.state.loading) {
+      return <PageLoading />;
+    }
+
     return (
       <div>
         <div className="BadgeNew__hero">
@@ -66,6 +75,7 @@ export default class BadgeNews extends Component {
                 onChange={this.handleChanges}
                 onSubmit={this.handleSubmit}
                 formValues={this.state.form}
+                error={this.state.error}
               />
             </div>
           </div>

@@ -60,7 +60,7 @@ export default class BadgeForms extends Component {
           </div>
 
           <div className="form-group">
-            <label>Twtter</label>
+            <label>Twitter</label>
             <input
               onChange={onChange}
               type="text"
@@ -73,6 +73,10 @@ export default class BadgeForms extends Component {
           <button onClick={this.handleClick} className="btn btn-primary">
             Save
           </button>
+
+          {this.props.error ? (
+            <p className="text-danger"> {this.props.error} </p>
+          ) : null}
         </form>
       </div>
     );
