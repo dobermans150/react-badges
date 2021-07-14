@@ -5,11 +5,11 @@ import PageLoading from '../components/PageLoading';
 
 import api from '../api';
 import header from '../images/platziconf-logo.svg';
-import './styles/BadgeNews.css';
+import './styles/BadgeEdit.css';
 
-export default class BadgeNews extends Component {
+export default class BadgeEdit extends Component {
   state = {
-    loading: false,
+    loading: true,
     error: null,
     form: {
       jobTitle: '',
@@ -18,6 +18,21 @@ export default class BadgeNews extends Component {
       lastName: '',
       twitter: '',
     },
+  };
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData = async (e) => {
+    this.setState({ loading: true, error: null });
+
+    try {
+      const data = await api.badges.read(this.props.match.params.badgeId);
+      this.setState({ loading: false, form: data });
+    } catch (error) {
+      this.setState({ loading: false, error: error });
+    }
   };
 
   handleChanges = (e) => {
@@ -34,7 +49,7 @@ export default class BadgeNews extends Component {
     this.setState({ loading: true, error: null });
 
     try {
-      await api.badges.create(this.state.form);
+      await api.badges.update(this.props.match.params.badgeId, this.state.form);
       this.setState({ loading: false, error: null });
 
       this.props.history.push('/badges');
@@ -50,9 +65,9 @@ export default class BadgeNews extends Component {
 
     return (
       <div>
-        <div className="BadgeNew__hero">
+        <div className="BadgeEdit__hero">
           <img
-            className="BadgeNew__hero-image img-fluid"
+            className="BadgeEdit__hero-image img-fluid"
             src={header}
             alt="logo"
           />
@@ -71,7 +86,7 @@ export default class BadgeNews extends Component {
               />
             </div>
             <div className="col-6">
-              <h1>New Attendant</h1>
+              <h1>Edit Attendant</h1>
               <BadgeForms
                 onChange={this.handleChanges}
                 onSubmit={this.handleSubmit}

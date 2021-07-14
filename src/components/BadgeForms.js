@@ -13,8 +13,6 @@ export default class BadgeForms extends Component {
     const { onChange, formValues } = this.props;
     return (
       <div>
-        <h1>New Attendant</h1>
-
         <form onSubmit={this.props.onSubmit}>
           <div className="form-group">
             <label>First Name</label>
