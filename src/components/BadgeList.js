@@ -26,7 +26,7 @@ export default class BadgeList extends Component {
             return (
               <Link
                 key={badges.id}
-                to={`/badges/${badges.id}/edit`}
+                to={`/badges/${badges.id}`}
                 className="text-reset text-decoration-none"
               >
                 <li className="Badge__section-name-list">
